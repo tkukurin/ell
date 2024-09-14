@@ -43,10 +43,10 @@ def call(
         raise RuntimeError(_no_api_key_warning(model, _name, client, long=True, error=True))
 
     provider_class: Type[Provider] = config.get_provider_for(client)
-
     
     # XXX: Could actually delete htis
-    call_result = provider_class.call_model(client, model, messages, api_params, tools)
+    call_result = provider_class.call_model(
+        client, model, messages, api_params, tools)
     
     if config.verbose and not _exempt_from_tracking:
         model_usage_logger_post_start(_logging_color, call_result.actual_n)
